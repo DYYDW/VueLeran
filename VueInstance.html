@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,50 @@
     <title>VueInstance</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
-    
+    <div id="app">
+        <p>{{result}}</p>
+        <p>{{message}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                result: new Date().getTime(),
+                message: new Date().getTime()
+            },
+            watch: {
+                result: function (val, oldval) {
+                    console.log('new:%s,old:%s,'+new Date().getTime(), val, oldval)
+                }
+            },
+            beforeCreate () {
+                console.log('beforeCreate'+new Date().getTime())
+            },
+            created () {
+                console.log('created'+new Date().getTime())
+            },
+            beforeMount () {
+                console.log('beforeMount'+new Date().getTime())
+            },
+            mounted () {
+                console.log('mounted'+new Date().getTime())
+            },
+            beforeUpdate () {
+                console.log('beforeUpdate:%s'+new Date().getTime(),this.result)
+            },
+            updated () {
+                console.log('updated:%s'+new Date().getTime(),this.result)
+            },
+            beforeDestroy () {
+                console.log('beforeDestroy'+new Date().getTime())
+            },
+            destroyed () {
+                console.log('destroyed'+new Date().getTime())
+            }
+        })
+    </script>
 </body>
+
 </html>
