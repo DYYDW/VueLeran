@@ -1,12 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>VueClassAndStyleBindings</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
-    
+    <p>一、绑定HTML Class</p>
+    <div id="app1">
+        <p>1.对象语法</p>
+        <div class="static" v-bind:class="classObject">
+        </div>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el: "#app1",
+            data: {
+                isActive: true,
+                error: null
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.error,
+                        'text-danger': this.error && this.error.type === 'fatal'
+                    }
+                }
+            }
+        })
+    </script>
+    <div id="app2">
+        <p>2.数组语法</p>
+        <div v-bind:class="[classObject, errorClass]"></div>
+    </div>
+    <script>
+        var vm2 = new Vue({
+            el: "#app2",
+            data: {
+                isActive: true,
+                error: null,
+                errorClass: 'text-error'
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.error,
+                        'text-danger': this.error && this.error.type === 'fatal'
+                    }
+                }
+            }
+        })
+    </script>
+    <div id="app3">
+        <p>3.用在组件上</p>
+        <my-component class="baz boo"></my-component>
+        <my-component :class="classObject"></my-component>
+    </div>
+    <script>
+        //当在一个自定义组件上使用 class 属性时，这些类将被添加到该组件的根元素上面。这个元素上已经存在的类不会被覆盖。
+        Vue.component('my-component', {
+            template: '<p class="foo bar">Hi</p>'
+        })
+        var vm3 = new Vue({
+            el: "#app3",
+            data: {
+                isActive: true,
+                error: null
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.error,
+                        'text-danger': this.error && this.error.type === 'fatal'
+                    }
+                }
+            }
+        })
+    </script>
+    <p>二、绑定内联样式</p>
+    <div id="app4">
+        <p>1.对象语法</p>
+        <div :style="styleObject">Hello World</div>
+    </div>
+    <script>
+        var vm4 = new Vue({
+            el: "#app4",
+            data: {
+                styleObject: {
+                    color: 'red',
+                    fontSize: '13px'
+                }
+            }
+        })
+    </script>
+    <div id="app5">
+        <p>2.数组语法</p>
+        <div v-bind:style="[baseStyles, overridingStyles]">Hello World</div>
+    </div>
+    <script>
+        var vm5 = new Vue({
+            el: "#app5",
+            data: {
+                baseStyles: {
+                    color: 'red',
+                    fontSize: '13px'
+                },
+                overridingStyles: {
+                    color: 'yellow'
+                }
+            }
+        })
+    </script>
+    <div id="app6">
+        <p>3.自动添加前缀</p>
+        <div v-bind:style="[baseStyles, overridingStyles]">Hello World</div>
+        <!-- 当 v-bind:style 使用需要添加浏览器引擎前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀。 -->
+    </div>
+    <script>
+        var vm6 = new Vue({
+            el: "#app6",
+            data: {
+                baseStyles: {
+                    color: 'red',
+                    fontSize: '13px',
+                    transform: 'rotate(7deg)'
+                },
+                overridingStyles: {
+                    fontSize: '20px'
+                }
+            }
+        })
+    </script>
+
+    <div id="app7">
+        <p>4.多重值</p>
+        <div :style="baseStyles">Hello World</div>
+        <!-- 这样写只会渲染数组中最后一个被浏览器支持的值。在本例中，如果浏览器支持不带浏览器前缀的 flexbox，那么就只会渲染 display: flex。 -->
+    </div>
+    <script>
+        var vm7 = new Vue({
+            el:"#app7",
+            data:{
+                baseStyles:{
+                    display: ['-webkit-box', '-ms-flexbox', 'flex'],
+                    'font-family':[,'Open Sans','Helvetica','Arial','sans-serif','SimSun','Microsoft Yahei']
+                }
+            }
+        })
+    </script>
 </body>
+
 </html>
