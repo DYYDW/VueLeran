@@ -16,6 +16,14 @@
         <p>Message: {{ msg }}</p>
         <p v-once>这个将不会改变: {{ msg }}</p>
     </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '呵呵'
+            }
+        })
+    </script>
 
     <div id="app2">
         <p>2.原始HTML</p>
@@ -24,47 +32,7 @@
             <span v-html="rawHtml"></span>
         </p>
     </div>
-
-    <div id="app3">
-        <p>3.特性</p>
-        <button v-bind:disabled="isButtonDisabled">Button</button>
-    </div>
-
-    <div id="app4">
-        <p>4.使用JavaScript 表达式</p>
-        <p>{{ number + 1 }}</p>
-        <p>{{ ok ? 'YES' : 'NO' }}</p>
-        <p>{{ message.split('').reverse().join('') }}</p>
-        <div v-bind:id="'list-' + id">
-            <p>{{Math.sqrt(16)}}</p>
-            <p>{{new Date().getTime()}}</p>
-        </div>
-    </div>
-
-    <p>二.指令</p>
-    <div id="app5">
-        <p>1.参数</p>
-        <p v-if="seen">现在你看到我了</p>
-        <a v-bind:href="url">网址</a>
-        <a v-on:click="doSomething">点击事件</a>
-    </div>
-    <div id="app6">
-        <p>2.修饰符</p>
-        <form v-on:submit.prevent="onSubmit">阻止</form>
-    </div>
-    <p>三、缩写</p>
-    <div id="app7">
-        <a :href="url">网址</a>
-        <a @click="doSomething">点击事件</a>
-    </div>
     <script>
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                msg: '呵呵'
-            }
-        })
-
         var vm2 = new Vue({
             el: "#app2",
             data: {
@@ -75,7 +43,13 @@
                 rawHtml: '<span style="color: red">This should be red.</span>'
             }
         })
+    </script>
 
+    <div id="app3">
+        <p>3.特性</p>
+        <button v-bind:disabled="isButtonDisabled">Button</button>
+    </div>
+    <script>
         var vm3 = new Vue({
             el: "#app3",
             data: {
@@ -87,6 +61,19 @@
             }
         })
 
+    </script>
+
+    <div id="app4">
+        <p>4.使用JavaScript 表达式</p>
+        <p>{{ number + 1 }}</p>
+        <p>{{ ok ? 'YES' : 'NO' }}</p>
+        <p>{{ message.split('').reverse().join('') }}</p>
+        <div v-bind:id="'list-' + id">
+            <p>{{Math.sqrt(16)}}</p>
+            <p>{{new Date().getTime()}}</p>
+        </div>
+    </div>
+    <script>
         var vm4 = new Vue({
             el: "#app4",
             data: {
@@ -97,26 +84,49 @@
             }
         })
 
-        var vm5= new Vue({
-            el:"#app5",
-            data:{
-                seen:true,
-                url:'http://www.sina.com.cn/'
+    </script>
+
+    <p>二.指令</p>
+    <div id="app5">
+        <p>1.参数</p>
+        <p v-if="seen">现在你看到我了</p>
+        <a v-bind:href="url">网址</a>
+        <a v-on:click="doSomething">点击事件</a>
+    </div>
+    <script>
+        var vm5 = new Vue({
+            el: "#app5",
+            data: {
+                seen: true,
+                url: 'http://www.sina.com.cn/'
             },
             methods: {
-                doSomething:function(){
+                doSomething: function () {
                     console.log('123456')
                 }
             }
         })
-        var vm7= new Vue({
-            el:"#app7",
-            data:{
-                seen:true,
-                url:'http://www.baidu.com/'
+    </script>
+
+    <div id="app6">
+        <p>2.修饰符</p>
+        <form v-on:submit.prevent="onSubmit">阻止</form>
+    </div>
+    
+    <p>三、缩写</p>
+    <div id="app7">
+        <a :href="url">网址</a>
+        <a @click="doSomething">点击事件</a>
+    </div>
+    <script>        
+        var vm7 = new Vue({
+            el: "#app7",
+            data: {
+                seen: true,
+                url: 'http://www.baidu.com/'
             },
             methods: {
-                doSomething:function(){
+                doSomething: function () {
                     console.log('147258')
                 }
             }
