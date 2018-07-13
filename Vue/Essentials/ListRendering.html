@@ -20,7 +20,7 @@
         new Vue({
             el: '#app1',
             data: {
-                parentMessage:'Parent',
+                parentMessage: 'Parent',
                 items: [
                     { message: 'Foo' },
                     { message: 'Bar' }
@@ -36,20 +36,30 @@
     </ul>
     <script>
         new Vue({
-            el:"#app2",
-            data:{
-                obj:{
-                    firstName:'David',
-                    lastName:'Yu',
-                    age:28
+            el: "#app2",
+            data: {
+                obj: {
+                    firstName: 'David',
+                    lastName: 'Yu',
+                    age: 28
                 }
             }
         })
     </script>
     <p>三、key</p>
+    <p>为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有的且唯一的 id。</p>
+    <p>建议尽可能在使用 v-for 时提供 key，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升。</p>
     <p>四、数组更新检测</p>
     <p>1.变异方法</p>
-    <p>2.替换数组</p>
+    <p>Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新。这些方法如下：</p>
+    <p>push()</p>
+    <p>pop()</p>
+    <p>shift()</p>
+    <p>unshift()</p>
+    <p>splice()</p>
+    <p>sort()</p>
+    <p>reverse()</p>
+    <p>2.替换数组(很高效)</p>
     <p>3.注意事项</p>
     <p>五、对象更改检测注意事项</p>
     <p>六、显示过滤/排序结果</p>
